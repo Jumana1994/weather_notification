@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--    &lt;!&ndash; Create a custom view for res.config.settings &ndash;&gt;-->
+    <!--    <record id="res_config_settings_custom_view" model="ir.ui.view">-->
+    <!--        <field name="name">res.config.settings.custom.view</field>-->
+    <!--        <field name="model">res.config.settings</field>-->
+    <!--        <field name="arch" type="xml">-->
+    <!--            <form string="General Settings">-->
+    <!--                <header>-->
+    <!--                    <group>-->
+    <!--                        <label for="weather_api_keys" string="Weather API Key"/>-->
+    <!--                        <field name="weather_api_keys"/>-->
+    <!--                    </group>-->
+    <!--                    <group>-->
+    <!--                        <label for="api_keys" string="API Key"/>-->
+    <!--                        <field name="api_keys" attrs="{'invisible': [('weather_api_keys','=',False)]}"/>-->
+    <!--                    </group>-->
+    <!--                    <group>-->
+    <!--                        <label for="location" string="Location"/>-->
+    <!--                        <field name="location" attrs="{'invisible': [('weather_api_keys','=',False)]}"/>-->
+    <!--                    </group>-->
+    <!--                </header>-->
+    <!--            </form>-->
+    <!--        </field>-->
+    <!--    </record>-->
+
+    <!-- Update the existing view with the new custom view -->
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.weather</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="5"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('o_setting_right_pane')]"
+                   position="after">
+                <group string="Weather Settings">
+
+                    <group>
+                        <field name="weather_api_keys"/>
+                            <field name="api_keys"
+                                   attrs="{'invisible': [('weather_api_keys','=',False)]}"/>
+
+                            <field name="location"
+                                   attrs="{'invisible': [('weather_api_keys','=',False)]}"/>
+                    </group>
+                </group>
+
+
+            </xpath>
+        </field>
+    </record>
+</odoo>
+
+

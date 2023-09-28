@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-name="systray_icon" owl="1">
+        <t t-log="this.weatherApiKeys,'yyyy'"></t>
+        <div class="new_icon" t-if="this.state.weatherApiKeys">
+            <div class="icon_div">
+                <div class="toggle-icon" role="button" t-on-click="_onClick">
+                    <i id='create_order' class="fa fa-cloud fa-1.5x"
+                       style="color: white; margin-bottom:10px; padding:13px;"
+                       role="img" aria-label="Weather"/>
+                </div>
+                <div id="systray_notif" class="dropdown-content"
+                     t-att-class="{'show-dropdown': isDropdownOpen}">
+                    <ul>
+                        <li t-if="this.weatherData">
+                            <p style="font-weight: bold"
+                               t-esc="weatherData.date"/>
+                            <p class="big-font"
+                               t-esc="weatherData.temperature + 'K'"/>
+                            <!--                            <i class="fa fa-long-arrow-up" aria-hidden="true"/>-->
+                            <p style="color:#f5e836" class="big-font"
+                               t-esc="weatherData.description"/>
+                            <img t-attf-src="{{ weatherData.icon }}" t-if="weatherData.icon" style="width: 100px; height: 100px;"/>
+                            <p style="font-weight: bold"
+                               t-esc="'Humidity: ' + weatherData.humidity + '%'"
+                               class="fa fa-long-arrow-up"/>
+                            <p style="font-weight: bold"
+                               t-esc="'Place near ' + weatherData.place"/>
+                        </li>
+                        <li t-else="">
+                            <p>No weather data available.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>
